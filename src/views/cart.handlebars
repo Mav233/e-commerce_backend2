@@ -1,0 +1,33 @@
+<div class="cart-item">
+
+    {{#if this.product.thumbnails.length}}
+    <img src="{{this.product.thumbnails.[0]}}" alt="{{this.product.title}}">
+    {{/if}}
+
+    <div class="cart-info">
+        <h3>{{this.product.title}}</h3>
+        <p>$ {{this.product.price}}</p>
+
+        <form action="/api/carts/{{../cart._id}}/products/{{this.product._id}}" method="POST">
+            <input type="hidden" name="quantity" value="{{this.quantity}}">
+            <div class="cart-qty-controls">
+                <button formaction="/api/carts/{{../cart._id}}/products/{{this.product._id}}" formmethod="POST"
+                    name="quantity" value="{{this.quantity}}">
+                    ➖
+                </button>
+
+                <span>{{this.quantity}}</span>
+
+                <button formaction="/api/carts/{{../cart._id}}/products/{{this.product._id}}" formmethod="POST"
+                    name="quantity" value="{{this.quantity}}">
+                    ➕
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <form action="/api/carts/{{../cart._id}}/products/{{this.product._id}}/delete" method="POST">
+        <button class="btn-remove">Eliminar</button>
+    </form>
+
+</div>

@@ -1,0 +1,26 @@
+<h1 class="title">🖥️ Ecommerce Scopper</h1>
+
+<a href="/products/new" class="btn-add">
+    ➕ Agregar producto
+</a>
+
+<div class="products-grid">
+    {{#each products}}
+    <div class="product-card">
+        {{#if thumbnails.length}}
+        <img src="{{thumbnails.[0]}}" alt="{{title}}" class="product-img">
+        {{else}}
+        <img src="/img/no-image.png" alt="Sin imagen" class="product-img">
+        {{/if}}
+
+        <h2>{{title}}</h2>
+        <p class="category">{{category}}</p>
+        <p class="price">$ {{price}}</p>
+        <p class="stock">Stock: {{stock}}</p>
+
+        <a href="/products/{{_id}}" class="btn-detail">
+            Ver detalle
+        </a>
+    </div>
+    {{/each}}
+</div>

@@ -1,0 +1,80 @@
+<br>
+<a href="/" class="title-link">
+    <h1 class="title">{{title}}</h1>
+</a>
+
+
+<a href="/products/new" class="btn-add">
+    ➕ Agregar producto
+</a>
+
+<form class="filters" method="GET" action="/products">
+
+    <select name="category">
+        <option value="">Todas las marcas</option>
+        <option value="Samsung">Samsung</option>
+        <option value="Apple">Apple</option>
+        <option value="Xiaomi">Xiaomi</option>
+        <option value="Motorola">Motorola</option>
+        <option value="Google">Google</option>
+    </select>
+
+    <select name="stock">
+        <option value="">Stock</option>
+        <option value="available">Con stock</option>
+        <option value="empty">Sin stock</option>
+    </select>
+
+    <select name="sort">
+        <option value="">Ordenar por precio</option>
+        <option value="asc">Menor a mayor</option>
+        <option value="desc">Mayor a menor</option>
+    </select>
+
+    <button type="submit" class="btn-filter">
+        🔍 Filtrar
+    </button>
+
+</form>
+
+
+<div class="container">
+
+    <div class="products-grid">
+        {{#each products}}
+        <div class="product-card">
+
+            {{#if this.thumbnails.length}}
+            <img src="{{this.thumbnails.[0]}}" alt="{{this.title}}" class="product-img">
+            {{/if}}
+
+            <h3>{{this.title}}</h3>
+            <p>{{this.description}}</p>
+            <p class="price">$ {{this.price}}</p>
+
+            <a href="/products/{{this._id}}" class="btn-primary">
+                Ver detalle
+            </a>
+
+        </div>
+        {{/each}}
+    </div>
+
+
+    {{#if hasPrevPage}}
+    <a href="/products?page={{prevPage}}&category={{category}}&stock={{stock}}&sort={{sort}}" class="btn-page">
+        ⬅ Anterior
+    </a>
+    {{/if}}
+
+    <span class="page-info">
+        Página {{page}} de {{totalPages}}
+    </span>
+
+    {{#if hasNextPage}}
+    <a href="/products?page={{nextPage}}&category={{category}}&stock={{stock}}&sort={{sort}}" class="btn-page">
+        Siguiente ➡
+    </a>
+    {{/if}}
+
+</div>
