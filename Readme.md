@@ -24,6 +24,7 @@ Proyecto final del curso Backend 2, donde se desarrolla un backend completo para
 - #### El proyecto sigue una arquitectura en capas, separando responsabilidades de manera clara y escalable:
 
 src/
+
 ├── config/         # Configuración (MongoDB, Passport)
 
 ├── controllers/    # Controladores HTTP
