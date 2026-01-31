@@ -4,21 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <title>E-commerce Scopper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- CSS -->
     <link rel="stylesheet" href="/styles/main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
 
+    {{> navbar}}
+
     {{{body}}}
 
-    <!-- Toastify JS -->
+    <!-- Toastify -->
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-    <!-- JS principal -->
+    <script>
+        function showToast(message, success = true) {
+            Toastify({
+                text: message,
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                close: true,
+                style: {
+                    background: success ? "#16a34a" : "#dc2626"
+                }
+            }).showToast();
+        }
+    </script>
+
     <script src="/js/main.js"></script>
+
 </body>
 
 </html>

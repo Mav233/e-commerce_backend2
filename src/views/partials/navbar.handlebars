@@ -1,0 +1,21 @@
+<nav class="navbar">
+    <a href="/" class="brand">SCOPPER</a>
+
+    <div class="nav-links">
+        <a href="/products">Productos</a>
+
+        {{#if user}}
+        <div class="nav-user">
+            <span class="user-email">{{user.email}}</span>
+            <span class="user-role">({{user.role}})</span>
+
+            <form action="/api/sessions/logout" method="POST">
+                <button class="logout">Salir</button>
+            </form>
+        </div>
+        {{else}}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+        {{/if}}
+    </div>
+</nav>

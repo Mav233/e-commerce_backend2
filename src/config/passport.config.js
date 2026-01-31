@@ -1,22 +1,17 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
-import bcrypt from "bcrypt";
 import { UserModel } from "../models/user.model.js";
+import { createHash, isValidPassword } from "../utils/bcrypt.js";
 
 /* COOKIE EXTRACTOR */
 const cookieExtractor = req => {
-    if (req && req.cookies) {
-        return req.cookies.jwt;
-    }
-    return null;
+    return req?.cookies?.jwt || null;
 };
 
-/* PASSPORT INITIALIZER */
 const initializePassport = () => {
 
-    /* REGISTER */
-
+/* REGISTER */
     passport.use(
         "register",
         new LocalStrategy(
@@ -26,25 +21,30 @@ const initializePassport = () => {
             },
             async (req, email, password, done) => {
                 try {
-                    const { first_name, last_name, age } = req.body;
+                    const { first_name, last_name } = req.body;
 
                     const exists = await UserModel.findOne({ email });
                     if (exists) {
                         return done(null, false);
                     }
 
-                    const hashedPassword = bcrypt.hashSync(password, 10);
+                    let role = "user";
 
-                    const user = await UserModel.create({
+                    if (email === "admin@admin.com") {
+                        role = "admin";
+                    }
+
+                    const newUser = {
                         first_name,
                         last_name,
-                        age,
                         email,
-                        password: hashedPassword,
-                        role: "user"
-                    });
+                        password: createHash(password),
+                        role
+                    };
 
+                    const user = await UserModel.create(newUser);
                     return done(null, user);
+
                 } catch (error) {
                     return done(error);
                 }
@@ -52,21 +52,19 @@ const initializePassport = () => {
         )
     );
 
-    /* LOGIN */
-
+/* LOGIN */
     passport.use(
         "login",
         new LocalStrategy(
-            {
-                usernameField: "email"
-            },
+            { usernameField: "email" },
             async (email, password, done) => {
                 try {
                     const user = await UserModel.findOne({ email });
                     if (!user) return done(null, false);
 
-                    const isValid = bcrypt.compareSync(password, user.password);
-                    if (!isValid) return done(null, false);
+                    if (!isValidPassword(user, password)) {
+                        return done(null, false);
+                    }
 
                     return done(null, user);
                 } catch (error) {
@@ -76,19 +74,25 @@ const initializePassport = () => {
         )
     );
 
-    /* CURRENT (JWT desde cookie) */
-
-    passport.use("current", new JwtStrategy({
-        jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
-        secretOrKey: process.env.JWT_SECRET,
-    }, async (payload, done) => {
-        try {
-            return done(null, payload.user);
-        } catch (error) {
-            return done(error);
-        }
-    }));
-
+/* CURRENT (JWT) */
+    passport.use(
+        "current",
+        new JwtStrategy(
+            {
+                jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
+                secretOrKey: process.env.JWT_SECRET
+            },
+            async (payload, done) => {
+                try {
+                    const user = await UserModel.findById(payload.id);
+                    if (!user) return done(null, false);
+                    return done(null, user);
+                } catch (error) {
+                    return done(error);
+                }
+            }
+        )
+    );
 };
 
 export default initializePassport;

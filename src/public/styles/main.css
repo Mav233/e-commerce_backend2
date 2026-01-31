@@ -195,7 +195,7 @@ header h1 {
     transform: scale(1.05);
 }
 
-/* FORMULARIO PROFESIONAL */
+/* FORMULARIO */
 
 .form-container {
     max-width: 520px;
@@ -444,9 +444,7 @@ header h1 {
     text-decoration: underline;
 }
 
-/* ===============================
-   CHECKOUT / CART
-=============================== */
+/* CHECKOUT / CART */
 
 .cart-container {
     max-width: 900px;
@@ -543,9 +541,7 @@ header h1 {
     background-color: #21867a;
 }
 
-/* ===============================
-   RESPONSIVE
-=============================== */
+/* RESPONSIVE */
 
 @media (max-width: 768px) {
     .cart-item {
@@ -595,4 +591,228 @@ header h1 {
     font-weight: bold;
     min-width: 20px;
     text-align: center;
+}
+
+.navbar {
+    background: linear-gradient(90deg, #111827, #1f2937);
+    padding: 1rem 2.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.navbar .brand {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #f9fafb;
+}
+
+.navbar .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navbar .nav-links a {
+    color: #d1d5db;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.navbar .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #3b82f6;
+    transition: width 0.3s ease;
+}
+
+.navbar .nav-links a:hover::after {
+    width: 100%;
+}
+
+.navbar button {
+    background-color: #3b82f6;
+    border: none;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.navbar button:hover {
+    background-color: #2563eb;
+}
+
+.auth-container {
+    max-width: 420px;
+    margin: 4rem auto;
+    padding: 2.5rem;
+
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.15);
+
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-container h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    color: #111827;
+}
+
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.auth-container label {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.auth-container input {
+    padding: 0.65rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    font-size: 0.95rem;
+}
+
+.auth-container input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.auth-container button {
+    margin-top: 1rem;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.auth-container button:hover {
+    filter: brightness(1.1);
+}
+
+.auth-container p {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.auth-container a {
+    color: #2563eb;
+    font-weight: 600;
+}
+
+.auth-container a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+
+    .navbar .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+
+    .auth-container {
+        margin: 2.5rem 1rem;
+        padding: 2rem;
+    }
+}
+
+.auth-container p {
+    margin-top: 1.8rem;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #4b5563;
+}
+
+.auth-container p a {
+    color: #2563eb;
+    font-weight: 600;
+    margin-left: 0.25rem;
+    position: relative;
+}
+
+.auth-container p a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background-color: #2563eb;
+    transition: width 0.3s ease;
+}
+
+.auth-container p a:hover::after {
+    width: 100%;
+}
+
+.auth-footer {
+    margin-top: 1.8rem;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #4b5563;
+}
+
+.auth-footer a {
+    color: #2563eb;
+    font-weight: 600;
+    margin-left: 0.25rem;
+    position: relative;
+}
+
+.auth-footer a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background-color: #2563eb;
+    transition: width 0.3s ease;
+}
+
+.auth-footer a:hover::after {
+    width: 100%;
 }

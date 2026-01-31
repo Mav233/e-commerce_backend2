@@ -9,7 +9,8 @@
     <p class="price">$ {{product.price}}</p>
 
     <!-- AGREGAR AL CARRITO -->
-    <form action="/carts/{{cartId}}/product/{{product._id}}" method="POST">
+    <form action="/api/carts/{{cartId}}/product/{{product._id}}" method="POST">
+
         <button type="submit" class="btn-primary">
             🛒 Agregar al carrito
         </button>
@@ -22,5 +23,21 @@
 <a href="/products" class="btn-primary">
     ← Volver al listado de productos
 </a>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("added")) {
+        setTimeout(() => {
+            if (params.get("added") === "success") {
+                showToast("Producto agregado al carrito 🛒", true);
+            }
+
+            if (params.get("added") === "error") {
+                showToast("No se pudo agregar el producto", false);
+            }
+        }, 100);
+    }
+</script>
 
 </div>

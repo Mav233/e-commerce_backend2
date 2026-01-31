@@ -1,8 +1,12 @@
 <h1 class="title">🖥️ Ecommerce Scopper</h1>
 
+{{#if user}}
+{{#if (eq user.role "admin")}}
 <a href="/products/new" class="btn-add">
     ➕ Agregar producto
 </a>
+{{/if}}
+{{/if}}
 
 <div class="products-grid">
     {{#each products}}
@@ -21,6 +25,35 @@
         <a href="/products/{{_id}}" class="btn-detail">
             Ver detalle
         </a>
+
+        {{#if ../user}}
+        <form action="/cart/product/{{_id}}" method="POST" class="add-cart-form">
+            <button type="submit">🛒 Agregar</button>
+        </form>
+        {{else}}
+        <p class="login-warning">
+            Iniciá sesión para agregar al carrito
+        </p>
+        {{/if}}
     </div>
     {{/each}}
 </div>
+
+{{!-- TOASTIFY --}}
+{{#if loginSuccess}}
+<script>
+    showToast("Sesión iniciada correctamente");
+</script>
+{{/if}}
+
+{{#if registerSuccess}}
+<script>
+    showToast("Usuario registrado con éxito");
+</script>
+{{/if}}
+
+{{#if cartSuccess}}
+<script>
+    showToast("Producto agregado al carrito");
+</script>
+{{/if}}

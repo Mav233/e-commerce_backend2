@@ -1,0 +1,19 @@
+<h1>Compra finalizada</h1>
+
+<p><strong>Código del ticket:</strong> {{ticket.code}}</p>
+<p><strong>Fecha:</strong> {{ticket.purchase_datetime}}</p>
+<p><strong>Total pagado:</strong> ${{ticket.amount}}</p>
+<p><strong>Comprador:</strong> {{ticket.purchaser}}</p>
+
+{{#if notPurchased.length}}
+<h2>Productos sin stock</h2>
+<ul>
+    {{#each notPurchased}}
+    <li>{{this}}</li>
+    {{/each}}
+</ul>
+{{else}}
+<p>Todos los productos fueron comprados correctamente ✅</p>
+{{/if}}
+
+<a href="/products">Volver a productos</a>
