@@ -3,7 +3,7 @@ Proyecto final del curso Backend 2, donde se desarrolla un backend completo para
 
 # 🚀 Tecnologías utilizadas
 
-###### Node.js
+#### Node.js
 
 #### Express.js
 
