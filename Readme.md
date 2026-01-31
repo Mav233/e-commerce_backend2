@@ -2,6 +2,7 @@
 Proyecto final del curso Backend 2, donde se desarrolla un backend completo para un e-commerce aplicando conceptos de arquitectura profesional, autenticación y autorización por roles, patrones de diseño, y lógica de compra real.
 
 # 🚀 Tecnologías utilizadas
+
 ###### Node.js
 
 #### Express.js
