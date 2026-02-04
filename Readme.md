@@ -248,5 +248,5 @@ npm run dev
 Servidor disponible (por defecto): 
 
 ```bash
-(http://localhost:8080)
+http://localhost:8080
 ```
