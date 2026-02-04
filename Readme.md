@@ -1,60 +1,63 @@
-# 🛍️ E-commerce Backend – Backend 2
+# 🛍️ E-commerce Backend 2
 Proyecto final del curso Backend 2, donde se desarrolla un backend completo para un e-commerce aplicando conceptos de arquitectura profesional, autenticación y autorización por roles, patrones de diseño, y lógica de compra real.
 
 # 🚀 Tecnologías utilizadas
 
-#### Node.js
+###### Node.js
 
-#### Express.js
+###### Express.js
 
-#### MongoDB + Mongoose
+###### MongoDB + Mongoose
 
-#### Passport.js
+###### Passport.js
 
-#### JWT (Json Web Token)
+###### JWT (Json Web Token)
 
-#### bcrypt
+###### bcrypt
 
-#### Handlebars
+###### Handlebars
 
-#### dotenv
+###### dotenv
 
 # 🧱 Arquitectura del proyecto
 
-- #### El proyecto sigue una arquitectura en capas, separando responsabilidades de manera clara y escalable:
+#### El proyecto sigue una arquitectura en capas, separando responsabilidades de manera clara y escalable:
 
-src/
+Src/
 
-├── config/         # Configuración (MongoDB, Passport)
+├── config/         **Configuración (MongoDB, Passport)**
 
-├── controllers/    # Controladores HTTP
+├── controllers/    **Controladores HTTP**
 
-├── services/       # Lógica de negocio
+├── services/       **Lógica de negocio**
 
-├── repositories/   # Patrón Repository
+├── repositories/   **Patrón Repository**
 
-├── dao/            # Acceso a datos (Data Access Object)
+├── dao/            **Acceso a datos (Data Access Object)**
 
-├── dto/            # Data Transfer Objects
+├── dto/            **Data Transfer Objects**
 
-├── models/         # Modelos Mongoose
+├── models/         **Modelos Mongoose**
 
-├── routes/         # Endpoints de API y rutas de vistas
+├── routes/         **Endpoints de API y rutas de vistas**
 
-├── middlewares/    # Middlewares (auth, manejo de errores)
+├── middlewares/    **Middlewares (auth, manejo de errores)**
 
-├── utils/          # Utilidades generales
+├── utils/          **Utilidades generales**
 
-├── views/          # Plantillas Handlebars
+├── views/          **Plantillas Handlebars**
 
-└── public/         # Archivos estáticos (CSS, JS, imágenes)
+└── public/         **Archivos estáticos (CSS, JS, imágenes)**
 
 ✔️ Arquitectura con DAO + Repository + DTO
 
 # 👤 Usuarios (Users)
-- Modelo User
 
-javascript
+###### **Modelo User**
+
+**Javascript**
+
+``` bash 
 {
   first_name: String,
   last_name: String,
@@ -64,157 +67,186 @@ javascript
   cart: ObjectId, // referencia a Cart
   role: String // "user" por defecto
 }
-Contraseñas encriptadas con bcrypt
+```  
 
-Asociación automática de carrito al registrarse
+- Contraseñas encriptadas con bcrypt.
 
-Soporte para múltiples roles
+- Asociación automática de carrito al registrar.
+
+- Soporte para múltiples rol.
 
 # 🔐 Seguridad y autenticación
-🔑 Encriptación:
 
-Uso de bcrypt (hashSync) para proteger contraseñas.
+**🔑 Encriptación:**
+
+- Uso de bcrypt (hashSync) para proteger contraseñas.
 
 # 🔒 Autenticación (Passport)
-Local Strategy: register, login
 
-JWT Strategy: current (lee token desde cookies httpOnly)
+- Local Strategy: register, login
+
+- JWT Strategy: current (lee token desde cookies httpOnly)
 
 # 🪪 Tokens JWT
-Guardados en cookies seguras (httpOnly)
 
-Contienen id y role del usuario
+- Guardados en cookies seguras (httpOnly)
 
-Expiran en 1 día
+- Contienen id y role del usuario
+
+- Expiran en 1 día
 
 # 🧩 Autorización por roles
-Rol	Permisos principales: 
 
-Admin	Crear, actualizar y eliminar productos
+**Rol	Permisos principales:**
 
-User	Agregar productos al carrito, finalizar compra
+- Admin	Crear, actualizar y eliminar productos
 
-Middleware de autorización personalizado para garantizar seguridad.
+- User	Agregar productos al carrito, finalizar compra
+
+- Middleware de autorización personalizado para garantizar seguridad.
 
 # 📦 Productos
-CRUD completo de productos:
 
-Paginación integrada con mongoose-paginate-v2
+**CRUD completo de productos:**
 
-Filtros disponibles:
+- Paginación integrada con mongoose-paginate-v2
 
-Por categoría
+##### Filtros disponibles:
 
-Por stock disponible
+- Por categoría
 
-Ordenamiento por precio (ascendente / descendente)
+- Por stock disponible
+
+- Ordenamiento por precio (ascendente / descendente)
 
 # 🛒 Carritos
-Cada usuario obtiene un carrito al registrarse automáticamente. 
 
-Funcionalidades principales:
+- Cada usuario obtiene un carrito al registrarse automáticamente. 
 
-Crear y obtener carritos
+- Funcionalidades principales:
 
-Agregar y eliminar productos
+- Crear y obtener carritos
 
-Finalizar compra y generar ticket
+- Agregar y eliminar productos
+
+- Finalizar compra y generar ticket
 
 # 🎟️ Tickets (Compras)
 
 Modelo Ticket para registrar las compras exitosas:
 
-javascript
+**Javascript**
+
+```bash
 {
   code: String, // único autogenerado
   purchase_datetime: Date,
   amount: Number, // total
   purchaser: String // email del usuario
 }
+``` 
 
 # 🧭 Proceso de compra
-Se valida stock de todos los productos en el carrito.
 
-Si hay stock, se descuenta y se incluye en el ticket.
+- Se valida stock de todos los productos en el carrito.
 
-Si no hay stock, el producto se excluye del ticket.
+- Si hay stock, se descuenta y se incluye en el ticket.
 
-El carrito se actualiza con los productos no comprados.
+- Si no hay stock, el producto se excluye del ticket.
 
-Se genera un Ticket con el total de la compra.
+- El carrito se actualiza con los productos no comprados.
+
+- Se genera un Ticket con el total de la compra.
 
 # 🧠 Repository
 Se aplica el patrón Repository para desacoplar la lógica de negocio del acceso a datos.
 
 #### Repositorios incluidos:
 
-ProductsRepository
+- ProductsRepository
 
-CartsRepository
+- CartsRepository
 
-UsersRepository
+- UsersRepository
 
-TicketsRepository
+- TicketsRepository
 
 Los services interactúan sólo con repositories, no con el DAO directamente.
 
 # 📤 DTOs (Data Transfer Objects)
+
 Se implementan para proteger información sensible y mantener formatos consistentes.
 
-UserDTO
+- UserDTO
 
-ProductDTO
+- ProductDTO
 
 Ejemplo: el endpoint /current retorna un UserDTO con información segura y normalizada.
 
 # 🌐 Rutas principales
-- ##### Sessions -->
 
-POST   /api/sessions/register
+##### Sessions
 
-POST   /api/sessions/login
+**POST**   /api/sessions/register
 
-GET    /api/sessions/current
+**POST**   /api/sessions/login
 
-POST   /api/sessions/logout
+**GET**    /api/sessions/current
 
-- #### Products --> 
+**POST**   /api/sessions/logout
 
-GET    /api/products
+#### Products
 
-POST   /api/products          // admin
 
-PUT    /api/products/:pid     // admin
+**GET**    /api/products
 
-DELETE /api/products/:pid     // admin
+**POST**   /api/products          // admin
 
-- #### Carts -->
+**PUT**    /api/products/:pid     // admin
 
-POST   /api/carts
+**DELETE** /api/products/:pid     // admin
 
-GET    /api/carts/:cid
+#### Carts
 
-POST   /api/carts/:cid/product/:pid
+**POST**   /api/carts
 
-DELETE /api/carts/:cid/products/:pid
+**GET**    /api/carts/:cid
 
-POST   /api/carts/:cid/purchase
+**POST**   /api/carts/:cid/product/:pid
+
+**DELETE** /api/carts/:cid/products/:pid
+
+**POST**   /api/carts/:cid/purchase
 
 # ⚙️ Variables de entorno
-Ejemplo de archivo .env:
 
-text
+**Ejemplo de archivo .env:**
+
+```bash
 MONGO_URL=mongodb+srv://...
+
 JWT_SECRET=supersecretkey
+
 PORT=8080
+```
 
 
 # ▶️ Ejecución del proyecto
-bash
+
 # Instalar dependencias
+
+```bash
 npm install
+```
 
 # Iniciar servidor en modo desarrollo
-npm run dev
 
-Servidor disponible (por defecto): http://localhost:8080
+```bash
+npm run dev
+```
+
+Servidor disponible (por defecto): 
+
+```bash
+(http://localhost:8080)
+```
